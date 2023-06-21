@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rewards Tracker</title>
+  <style>
+    body {
+      text-align: center;
+      padding: 20px;
+      background-color: #FDF5E6; /* Background color: Light Orange */
+    }
+    
+    h1 {
+      font-family: 'Comic Sans MS', cursive;
+      color: #FF0000; /* Red */
+    }
+    
+    p {
+      font-family: 'Arial', sans-serif;
+      color: #333333; /* Dark Gray */
+    }
+    
+    .button {
+      background-color: #F4D35E; /* Yellow */
+      color: #FFFFFF; /* White */
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    .button:hover {
+      background-color: #FFA500; /* Orange */
+    }
+    
+    .task-list {
+      display: none;
+      text-align: left;
+      margin-top: 20px;
+    }
+    
+    .task {
+      margin-bottom: 10px;
+    }
+    
+    .celebration {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Rewards Tracker!</h1>
+  <p>Please select your name:</p>
+  <button class="button" onclick="selectName('Darius')">Darius</button>
+  <button class="button" onclick="selectName('Caleb')">Caleb</button>
+
+  <div id="greeting"></div>
+
+  <div id="tasks" class="task-list">
+    <div id="packedBagTask" class="task">
+      <input type="checkbox" id="packedBagCheckbox">
+      <label for="packedBagCheckbox">Packed my bag</label>
+    </div>
+    <div id="brushedTeethTask" class="task">
+      <input type="checkbox" id="brushedTeethCheckbox">
+      <label for="brushedTeethCheckbox">Brushed my teeth</label>
+    </div>
+    <div id="learnedWordsTask" class="task">
+      <input type="checkbox" id="learnedWordsCheckbox">
+      <label for="learnedWordsCheckbox">Learned 3 new words</label>
+      <br>
+      <input type="text" id="newWordsInput" placeholder="Type 3 new words">
+    </div>
+    <button id="submitBtn" class="button" onclick="showCelebration()" style="display: none;">Submit</button>
+  </div>
+
+  <div id="celebration" class="celebration">
+    <h2>Congratulations!</h2>
+    <p>You completed all the tasks!</p>
+    <img src="celebration_animation.gif" alt="Celebration Animation">
+  </div>
+
+<script>
+  function selectName(name) {
+    document.getElementById('greeting').textContent = `Hello, ${name}!`;
+
+    if (name === 'Darius') {
+      document.getElementById('tasks').style.display = 'block';
+    } else {
+      document.getElementById('tasks').style.display = 'none';
+    }
+  }
+
+  function checkTasks() {
+    const packedBagChecked = document.getElementById('packedBagCheckbox').checked;
+    const brushedTeethChecked = document.getElementById('brushedTeethCheckbox').checked;
+    const learnedWordsChecked = document.getElementById('learnedWordsCheckbox').checked;
+    const newWordsInput = document.getElementById('newWordsInput').value;
+
+    if (packedBagChecked && brushedTeethChecked && learnedWordsChecked && newWordsInput !== '') {
+      document.getElementById('submitBtn').style.display = 'block';
+    } else {
+      document.getElementById('submitBtn').style.display = 'none';
+    }
+  }
+
+  function showCelebration() {
+    document.getElementById('tasks').style.display = 'none';
+    document.getElementById('celebration').style.display = 'block';
+  }
+
+  document.getElementById('packedBagCheckbox').addEventListener('change', checkTasks);
+  document.getElementById('brushedTeethCheckbox').addEventListener('change', checkTasks);
+  document.getElementById('learnedWordsCheckbox').addEventListener('change', checkTasks);
+  document.getElementById('newWordsInput').addEventListener('input', checkTasks);
+</script>
+
+
